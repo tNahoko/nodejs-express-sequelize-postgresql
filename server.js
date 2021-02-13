@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to Nahoko's app."});
 })
 
-const PORT = precess.env.PORT || 8080;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}.`);
 })
