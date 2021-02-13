@@ -23,6 +23,8 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to Nahoko's app."});
 })
 
+require("./app/routes/tutorial.routes")(app);
+
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}.`);
