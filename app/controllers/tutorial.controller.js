@@ -2,6 +2,7 @@ const db = require("../models");
 const Tutorial = db.tutorials;
 const Op = db.Sequelize.Op;
 
+// Create a new object
 exports.create = (req, res) => {
   if(!req.body.title) {
     res.status(400).send({
@@ -28,6 +29,7 @@ exports.create = (req, res) => {
     });
 };
 
+// Retrieve all Tutorials from the database.
 exports.findAll = (req, res) => {
   const title = req.query.title;
   let condition = title ? { title: {[Op.iLike]: `%${title}%`}} : null;
@@ -43,6 +45,22 @@ exports.findAll = (req, res) => {
     });
 };
 
+// Retrieve a single object
+exports.findOne = (req, res) => {
+  const id = req.params.id;
+
+  Tutorial.findByPk(id)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error retrieving Tutorial with id=" + id
+      });
+    });
+};
+
+// Update an object
 exports.update = (req, res) => {
   const id = req.params.id;
 
@@ -66,3 +84,4 @@ exports.update = (req, res) => {
       });
     });
 };
+
