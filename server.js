@@ -2,6 +2,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
+const db = require("./app/models");
+db.sequalize.sync({ force: true }).then(() => {
+  console.log("Drop and re-sync db.");
+});
+
 const app = express();
 
 let corsOptions = {
@@ -22,3 +27,4 @@ const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}.`);
 })
+
