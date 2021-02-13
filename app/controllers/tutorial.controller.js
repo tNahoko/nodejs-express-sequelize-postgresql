@@ -111,3 +111,22 @@ exports.delete = (req, res) => {
 };
 
 // Delete all objects
+exports.deleteAll = (req, res) => {
+  Tutorial.destroy({
+    where: {},
+    truncate: false
+  })
+};
+
+// Find all objects by condition
+exports.findAllPublished = (req, res) => {
+  Tutorial.findAll({ where: { published: true}})
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: err.message || "Some error occurred while retrieving tutorials."
+      });
+    });
+};
